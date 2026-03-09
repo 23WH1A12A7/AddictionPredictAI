@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Digital Addiction Predictor{% endblock %}</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/static/style.css" />
+  
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- Mobile Navigation Bar -->
+<div class="mobile-nav">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <i class="fa-solid fa-brain"></i>
+      <span>Digital Predictor</span>
+    </div>
+    <div class="nav-menu-toggle" onclick="toggleMobileMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+  </div>
+  
+  <div class="nav-items" id="navItems">
+    <a href="/" class="nav-item {% if request.endpoint == 'home' %}active{% endif %}">
+      <i class="fa-solid fa-home"></i>
+      <span>Home</span>
+    </a>
+    <a href="/mood-analysis" class="nav-item {% if request.endpoint == 'mood_analysis' %}active{% endif %}">
+      <i class="fa-solid fa-brain"></i>
+      <span>Mood Analysis</span>
+    </a>
+    <a href="/dashboard" class="nav-item {% if request.endpoint == 'dashboard' %}active{% endif %}">
+      <i class="fa-solid fa-chart-line"></i>
+      <span>Dashboard</span>
+    </a>
+    <a href="/wellness" class="nav-item {% if request.endpoint == 'wellness' %}active{% endif %}">
+      <i class="fa-solid fa-heart"></i>
+      <span>Wellness</span>
+    </a>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+  <div class="content-wrapper">
+    {% block content %}{% endblock %}
+  </div>
+</div>
+
+<!-- Bottom Navigation (Mobile App Style) -->
+<div class="bottom-nav">
+  <a href="/" class="bottom-nav-item {% if request.endpoint == 'home' %}active{% endif %}">
+    <i class="fa-solid fa-home"></i>
+    <span>Home</span>
+  </a>
+  <a href="/mood-analysis" class="bottom-nav-item {% if request.endpoint == 'mood_analysis' %}active{% endif %}">
+    <i class="fa-solid fa-brain"></i>
+    <span>Mood</span>
+  </a>
+  <a href="/dashboard" class="bottom-nav-item {% if request.endpoint == 'dashboard' %}active{% endif %}">
+    <i class="fa-solid fa-chart-line"></i>
+    <span>Dashboard</span>
+  </a>
+  <a href="/wellness" class="bottom-nav-item {% if request.endpoint == 'wellness' %}active{% endif %}">
+    <i class="fa-solid fa-heart"></i>
+    <span>Wellness</span>
+  </a>
+</div>
+
+<script>
+function toggleMobileMenu() {
+  const navItems = document.getElementById('navItems');
+  navItems.style.display = navItems.style.display === 'flex' ? 'none' : 'flex';
+}
+
+document.addEventListener('click', function(event) {
+  const navItems = document.getElementById('navItems');
+  const navToggle = document.querySelector('.nav-menu-toggle');
+  
+  if (!navItems.contains(event.target) && !navToggle.contains(event.target)) {
+    navItems.style.display = 'none';
+  }
+});
+</script>
+
+{% block extra_js %}{% endblock %}
+
+</body>
+</html>

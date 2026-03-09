@@ -1,0 +1,1000 @@
+{% extends "base.html" %}
+
+{% block title %}AI Digital Wellbeing Guide{% endblock %}
+
+{% block content %}
+<div class="ai-wellness-container">
+  
+  <div class="welcome-card">
+    <div class="welcome-header">
+      <div class="ai-avatar">
+        <i class="fa-solid fa-robot"></i>
+      </div>
+      <div class="welcome-text">
+        <h1>Hi! I'm your Digital Wellness Guide 🌟</h1>
+        <p>Let's explore your relationship with technology together and find ways to improve your digital wellbeing.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-steps">
+      <div class="step active" id="step1">
+        <div class="step-number">1</div>
+        <div class="step-label">Daily Habits</div>
+      </div>
+      <div class="step" id="step2">
+        <div class="step-number">2</div>
+        <div class="step-label">Emotional Check</div>
+      </div>
+      <div class="step" id="step3">
+        <div class="step-number">3</div>
+        <div class="step-label">AI Insights</div>
+      </div>
+      <div class="step" id="step4">
+        <div class="step-number">4</div>
+        <div class="step-label">Personal Guidance</div>
+      </div>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width: 25%"></div>
+    </div>
+  </div>
+
+  <div class="step-content" id="step1Content">
+    <div class="question-card">
+      <div class="question-header">
+        <i class="fa-solid fa-clock"></i>
+        <h2>Let's talk about your daily digital routine</h2>
+        <p>This helps me understand your patterns and suggest personalized improvements.</p>
+      </div>
+      
+      <div class="habit-questions">
+        <div class="habit-question">
+          <div class="question-icon">📱</div>
+          <div class="question-content">
+            <h3>How much time do you spend on your phone daily?</h3>
+            <div class="emoji-slider">
+              <div class="slider-option" data-value="1">
+                <span class="emoji">🌅</span>
+                <span class="label">1-2 hours</span>
+              </div>
+              <div class="slider-option" data-value="3">
+                <span class="emoji">⏰</span>
+                <span class="label">3-4 hours</span>
+              </div>
+              <div class="slider-option" data-value="5">
+                <span class="emoji">📱</span>
+                <span class="label">5-6 hours</span>
+              </div>
+              <div class="slider-option" data-value="8">
+                <span class="emoji">📲</span>
+                <span class="label">7-8 hours</span>
+              </div>
+              <div class="slider-option" data-value="10">
+                <span class="emoji">📵</span>
+                <span class="label">9+ hours</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="habit-question">
+          <div class="question-icon">🎮</div>
+          <div class="question-content">
+            <h3>How much time do you spend gaming or on social media?</h3>
+            <div class="emoji-slider">
+              <div class="slider-option" data-value="0">
+                <span class="emoji">📚</span>
+                <span class="label">Rarely</span>
+              </div>
+              <div class="slider-option" data-value="1">
+                <span class="emoji">🎯</span>
+                <span class="label">1 hour</span>
+              </div>
+              <div class="slider-option" data-value="2">
+                <span class="emoji">🎮</span>
+                <span class="label">2-3 hours</span>
+              </div>
+              <div class="slider-option" data-value="4">
+                <span class="emoji">🎲</span>
+                <span class="label">4+ hours</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="habit-question">
+          <div class="question-icon">🌙</div>
+          <div class="question-content">
+            <h3>Do you use your phone before bedtime?</h3>
+            <div class="emoji-slider">
+              <div class="slider-option" data-value="0">
+                <span class="emoji">😴</span>
+                <span class="label">Never</span>
+              </div>
+              <div class="slider-option" data-value="1">
+                <span class="emoji">🌙</span>
+                <span class="label">Sometimes</span>
+              </div>
+              <div class="slider-option" data-value="2">
+                <span class="emoji">📱</span>
+                <span class="label">Often</span>
+              </div>
+              <div class="slider-option" data-value="3">
+                <span class="emoji">🌃</span>
+                <span class="label">Always</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="next-btn" onclick="goToStep(2)">
+        <i class="fa-solid fa-arrow-right"></i>
+        Continue to Emotional Check
+      </button>
+    </div>
+  </div>
+
+  <!-- Step 2: Emotional Check -->
+  <div class="step-content" id="step2Content" style="display: none;">
+    <div class="question-card">
+      <div class="question-header">
+        <i class="fa-solid fa-heart"></i>
+        <h2>How does technology make you feel?</h2>
+        <p>Your emotional relationship with devices is important for your wellbeing.</p>
+      </div>
+      
+      <div class="emotion-questions">
+        <div class="emotion-question">
+          <div class="question-icon">😰</div>
+          <div class="question-content">
+            <h3>How often do you feel anxious without your phone?</h3>
+            <div class="mood-scale">
+              <div class="mood-option" data-value="1">
+                <span class="mood-emoji">😌</span>
+                <span class="mood-text">Never</span>
+              </div>
+              <div class="mood-option" data-value="2">
+                <span class="mood-emoji">😐</span>
+                <span class="mood-text">Rarely</span>
+              </div>
+              <div class="mood-option" data-value="3">
+                <span class="mood-emoji">😟</span>
+                <span class="mood-text">Sometimes</span>
+              </div>
+              <div class="mood-option" data-value="4">
+                <span class="mood-emoji">😰</span>
+                <span class="mood-text">Often</span>
+              </div>
+              <div class="mood-option" data-value="5">
+                <span class="mood-emoji">😱</span>
+                <span class="mood-text">Always</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="emotion-question">
+          <div class="question-icon">💔</div>
+          <div class="question-content">
+            <h3>Do you feel lonely even after using social media?</h3>
+            <div class="mood-scale">
+              <div class="mood-option" data-value="1">
+                <span class="mood-emoji">🤗</span>
+                <span class="mood-text">Never</span>
+              </div>
+              <div class="mood-option" data-value="2">
+                <span class="mood-emoji">😊</span>
+                <span class="mood-text">Rarely</span>
+              </div>
+              <div class="mood-option" data-value="3">
+                <span class="mood-emoji">😐</span>
+                <span class="mood-text">Sometimes</span>
+              </div>
+              <div class="mood-option" data-value="4">
+                <span class="mood-emoji">😔</span>
+                <span class="mood-text">Often</span>
+              </div>
+              <div class="mood-option" data-value="5">
+                <span class="mood-emoji">💔</span>
+                <span class="mood-text">Always</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="emotion-question">
+          <div class="question-icon">🎯</div>
+          <div class="question-content">
+            <h3>How's your ability to focus lately?</h3>
+            <div class="mood-scale">
+              <div class="mood-option" data-value="5">
+                <span class="mood-emoji">🎯</span>
+                <span class="mood-text">Excellent</span>
+              </div>
+              <div class="mood-option" data-value="4">
+                <span class="mood-emoji">👁️</span>
+                <span class="mood-text">Good</span>
+              </div>
+              <div class="mood-option" data-value="3">
+                <span class="mood-emoji">👀</span>
+                <span class="mood-text">Average</span>
+              </div>
+              <div class="mood-option" data-value="2">
+                <span class="mood-emoji">😵</span>
+                <span class="mood-text">Poor</span>
+              </div>
+              <div class="mood-option" data-value="1">
+                <span class="mood-emoji">🤯</span>
+                <span class="mood-text">Very Poor</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button class="back-btn" onclick="goToStep(1)">
+          <i class="fa-solid fa-arrow-left"></i>
+          Back
+        </button>
+        <button class="next-btn" onclick="goToStep(3)">
+          <i class="fa-solid fa-arrow-right"></i>
+          Get AI Insights
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3: AI Insights -->
+  <div class="step-content" id="step3Content" style="display: none;">
+    <div class="insights-card">
+      <div class="ai-thinking">
+        <div class="ai-avatar thinking">
+          <i class="fa-solid fa-robot fa-pulse"></i>
+        </div>
+        <p>Analyzing your digital patterns...</p>
+      </div>
+      
+      <div class="insights-results" id="insightsResults" style="display: none;">
+        <h2>Your Digital Wellbeing Insights</h2>
+        
+        <div class="insight-card">
+          <div class="insight-icon">🧠</div>
+          <div class="insight-content">
+            <h3>Emotional State</h3>
+            <p id="emotionalState">Analyzing...</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-icon">📊</div>
+          <div class="insight-content">
+            <h3>Digital Balance</h3>
+            <p id="digitalBalance">Analyzing...</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-icon">⚠️</div>
+          <div class="insight-content">
+            <h3>Risk Factors</h3>
+            <p id="riskFactors">Analyzing...</p>
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-icon">💪</div>
+          <div class="insight-content">
+            <h3>Strengths</h3>
+            <p id="strengths">Analyzing...</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="navigation-buttons">
+        <button class="back-btn" onclick="goToStep(2)">
+          <i class="fa-solid fa-arrow-left"></i>
+          Back
+        </button>
+        <button class="next-btn" onclick="goToStep(4)">
+          <i class="fa-solid fa-arrow-right"></i>
+          Get Personal Guidance
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 4: Personal Guidance -->
+  <div class="step-content" id="step4Content" style="display: none;">
+    <div class="guidance-card">
+      <div class="guidance-header">
+        <i class="fa-solid fa-sparkles"></i>
+        <h2>Your Personalized Digital Wellness Plan</h2>
+        <p>Based on your unique patterns, here's your customized guidance:</p>
+      </div>
+
+      <div class="guidance-sections">
+        <div class="guidance-section">
+          <div class="section-icon">🧘</div>
+          <div class="section-content">
+            <h3>Immediate Actions</h3>
+            <div id="immediateActions">
+              <div class="action-item">
+                <i class="fa-solid fa-check-circle"></i>
+                <span>Take a 5-minute break every hour</span>
+              </div>
+              <div class="action-item">
+                <i class="fa-solid fa-check-circle"></i>
+                <span>Set phone-free meal times</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="guidance-section">
+          <div class="section-icon">🌿</div>
+          <div class="section-content">
+            <h3>Mental Health Tips</h3>
+            <div id="mentalHealthTips">
+              <div class="tip-item">
+                <i class="fa-solid fa-heart"></i>
+                <span>Practice mindfulness before bed</span>
+              </div>
+              <div class="tip-item">
+                <i class="fa-solid fa-heart"></i>
+                <span>Connect with friends offline daily</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="guidance-section">
+          <div class="section-icon">📱</div>
+          <div class="section-content">
+            <h3>Digital Detox Plan</h3>
+            <div id="detoxPlan">
+              <div class="detox-item">
+                <i class="fa-solid fa-mobile-alt"></i>
+                <span>30-minute evening detox routine</span>
+              </div>
+              <div class="detox-item">
+                <i class="fa-solid fa-mobile-alt"></i>
+                <span>Weekend digital-free morning</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="completion-actions">
+        <button class="action-btn primary" onclick="startWellnessJourney()">
+          <i class="fa-solid fa-play"></i>
+          Start My Wellness Journey
+        </button>
+        <button class="action-btn secondary" onclick="saveResults()">
+          <i class="fa-solid fa-save"></i>
+          Save My Results
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.ai-wellness-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Welcome Card */
+.welcome-card {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(168, 85, 247, 0.1));
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.welcome-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.ai-avatar {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #38bdf8, #a855f7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+}
+
+.ai-avatar.thinking {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.welcome-text h1 {
+  margin: 0 0 10px 0;
+  color: #38bdf8;
+  font-size: 24px;
+}
+
+.welcome-text p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 16px;
+}
+
+/* Progress Container */
+.progress-container {
+  margin-bottom: 30px;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+.step-number {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: #94a3b8;
+  border: 2px solid transparent;
+}
+
+.step.active .step-number {
+  background: #38bdf8;
+  color: white;
+  border-color: #38bdf8;
+}
+
+.step-label {
+  font-size: 12px;
+  color: #94a3b8;
+  text-align: center;
+}
+
+.step.active .step-label {
+  color: #38bdf8;
+}
+
+.progress-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8, #a855f7);
+  transition: width 0.5s ease;
+}
+
+/* Question Cards */
+.question-card, .insights-card, .guidance-card {
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 30px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.question-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.question-header i {
+  font-size: 32px;
+  color: #38bdf8;
+  margin-bottom: 15px;
+}
+
+.question-header h2 {
+  margin: 0 0 10px 0;
+  color: #e5e7eb;
+  font-size: 22px;
+}
+
+.question-header p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 16px;
+}
+
+/* Habit Questions */
+.habit-questions, .emotion-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.habit-question, .emotion-question {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+  border-left: 4px solid #38bdf8;
+}
+
+.question-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.question-content h3 {
+  margin: 0 0 15px 0;
+  color: #e5e7eb;
+  font-size: 18px;
+}
+
+/* Emoji Sliders */
+.emoji-slider, .mood-scale {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.slider-option, .mood-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+  min-width: 70px;
+}
+
+.slider-option:hover, .mood-option:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+}
+
+.slider-option.selected, .mood-option.selected {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: #38bdf8;
+}
+
+.emoji, .mood-emoji {
+  font-size: 24px;
+}
+
+.label, .mood-text {
+  font-size: 12px;
+  color: #94a3b8;
+  text-align: center;
+}
+
+/* Navigation Buttons */
+.navigation-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.next-btn, .back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.next-btn {
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  color: white;
+}
+
+.next-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.1);
+  color: #94a3b8;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.2);
+  color: #e5e7eb;
+}
+
+/* AI Thinking */
+.ai-thinking {
+  text-align: center;
+  padding: 40px;
+}
+
+.ai-thinking p {
+  color: #94a3b8;
+  font-size: 18px;
+}
+
+/* Insights */
+.insights-results {
+  margin-top: 30px;
+}
+
+.insights-results h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #38bdf8;
+}
+
+.insight-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+  margin-bottom: 15px;
+  border-left: 4px solid #38bdf8;
+}
+
+.insight-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.insight-content h3 {
+  margin: 0 0 5px 0;
+  color: #38bdf8;
+  font-size: 16px;
+}
+
+.insight-content p {
+  margin: 0;
+  color: #e5e7eb;
+  font-size: 14px;
+}
+
+/* Guidance */
+.guidance-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.guidance-header i {
+  font-size: 32px;
+  color: #a855f7;
+  margin-bottom: 15px;
+}
+
+.guidance-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.guidance-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+  border-left: 4px solid #a855f7;
+}
+
+.section-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.section-content h3 {
+  margin: 0 0 15px 0;
+  color: #a855f7;
+  font-size: 18px;
+}
+
+.action-item, .tip-item, .detox-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  color: #e5e7eb;
+}
+
+.action-item i, .tip-item i, .detox-item i {
+  color: #22c55e;
+  flex-shrink: 0;
+}
+
+.completion-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+}
+
+.action-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3);
+}
+
+.action-btn.secondary {
+  background: rgba(255,255,255,0.1);
+  color: #94a3b8;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.action-btn.secondary:hover {
+  background: rgba(255,255,255,0.2);
+  color: #e5e7eb;
+}
+
+/* Mobile Responsive */
+@media (max-width: 767px) {
+  .welcome-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .habit-question, .emotion-question, .guidance-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .emoji-slider, .mood-scale {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .navigation-buttons, .completion-actions {
+    flex-direction: column;
+  }
+  
+  .next-btn, .back-btn, .action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Data storage
+let userData = {
+  habits: {},
+  emotions: {},
+  insights: {}
+};
+
+// Step navigation
+function goToStep(stepNumber) {
+  // Hide all steps
+  document.querySelectorAll('.step-content').forEach(step => {
+    step.style.display = 'none';
+  });
+  
+  // Show current step
+  document.getElementById(`step${stepNumber}Content`).style.display = 'block';
+  
+  // Update progress
+  updateProgress(stepNumber);
+  
+  // Update step indicators
+  document.querySelectorAll('.step').forEach((step, index) => {
+    step.classList.toggle('active', index < stepNumber);
+  });
+  
+  // Special handling for step 3 (AI insights)
+  if (stepNumber === 3) {
+    generateAIInsights();
+  }
+}
+
+function updateProgress(stepNumber) {
+  const progress = (stepNumber / 4) * 100;
+  document.getElementById('progressFill').style.width = progress + '%';
+}
+
+// Selection handlers
+document.addEventListener('DOMContentLoaded', function() {
+  // Habit question handlers
+  document.querySelectorAll('.slider-option').forEach(option => {
+    option.addEventListener('click', function() {
+      const parent = this.closest('.habit-question');
+      parent.querySelectorAll('.slider-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      this.classList.add('selected');
+      
+      const questionName = parent.querySelector('h3').textContent;
+      userData.habits[questionName] = this.dataset.value;
+    });
+  });
+  
+  // Emotion question handlers
+  document.querySelectorAll('.mood-option').forEach(option => {
+    option.addEventListener('click', function() {
+      const parent = this.closest('.emotion-question');
+      parent.querySelectorAll('.mood-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      this.classList.add('selected');
+      
+      const questionName = parent.querySelector('h3').textContent;
+      userData.emotions[questionName] = this.dataset.value;
+    });
+  });
+});
+
+// AI Insights Generation
+function generateAIInsights() {
+  const thinkingDiv = document.querySelector('.ai-thinking');
+  const resultsDiv = document.getElementById('insightsResults');
+  
+  // Simulate AI processing
+  setTimeout(() => {
+    thinkingDiv.style.display = 'none';
+    resultsDiv.style.display = 'block';
+    
+    // Generate insights based on user data
+    const screenTime = Object.values(userData.habits)[0] || '5';
+    const anxiety = Object.values(userData.emotions)[0] || '3';
+    
+    // Emotional State
+    const emotionalStates = {
+      '1-2': 'Balanced and mindful',
+      '3-4': 'Moderately engaged',
+      '5-6': 'Digitally dependent',
+      '7-8': 'Highly connected',
+      '9+': 'Digitally overwhelmed'
+    };
+    
+    document.getElementById('emotionalState').textContent = 
+      emotionalStates[screenTime] || 'Finding balance';
+    
+    // Digital Balance
+    document.getElementById('digitalBalance').textContent = 
+      `Your screen time suggests ${screenTime <= 3 ? 'healthy' : screenTime <= 6 ? 'moderate' : 'high'} digital engagement`;
+    
+    // Risk Factors
+    const riskFactors = [];
+    if (anxiety >= 4) riskFactors.push('High phone dependency');
+    if (screenTime >= 6) riskFactors.push('Excessive screen time');
+    if (userData.emotions['How\'s your ability to focus lately?'] <= 2) riskFactors.push('Focus challenges');
+    
+    document.getElementById('riskFactors').textContent = 
+      riskFactors.length > 0 ? riskFactors.join(', ') : 'Low risk factors detected';
+    
+    // Strengths
+    const strengths = [];
+    if (anxiety <= 2) strengths.push('Healthy phone relationship');
+    if (screenTime <= 4) strengths.push('Balanced screen time');
+    strengths.push('Self-aware about digital habits');
+    
+    document.getElementById('strengths').textContent = strengths.join(', ');
+    
+    // Generate personalized guidance
+    generatePersonalizedGuidance();
+  }, 2000);
+}
+
+function generatePersonalizedGuidance() {
+  const screenTime = Object.values(userData.habits)[0] || '5';
+  const anxiety = Object.values(userData.emotions)[0] || '3';
+  
+  // Immediate Actions
+  const immediateActions = [
+    '<div class="action-item"><i class="fa-solid fa-check-circle"></i><span>Take a 5-minute break every hour</span></div>',
+    '<div class="action-item"><i class="fa-solid fa-check-circle"></i><span>Set phone-free meal times</span></div>'
+  ];
+  
+  if (screenTime >= 6) {
+    immediateActions.push('<div class="action-item"><i class="fa-solid fa-check-circle"></i><span>Create a 30-minute daily digital detox</span></div>');
+  }
+  
+  if (anxiety >= 4) {
+    immediateActions.push('<div class="action-item"><i class="fa-solid fa-check-circle"></i><span>Practice mindfulness when feeling phone anxiety</span></div>');
+  }
+  
+  document.getElementById('immediateActions').innerHTML = immediateActions.join('');
+  
+  // Mental Health Tips
+  const tips = [
+    '<div class="tip-item"><i class="fa-solid fa-heart"></i><span>Practice mindfulness before bed</span></div>',
+    '<div class="tip-item"><i class="fa-solid fa-heart"></i><span>Connect with friends offline daily</span></div>'
+  ];
+  
+  if (anxiety >= 3) {
+    tips.push('<div class="tip-item"><i class="fa-solid fa-heart"></i><span>Try breathing exercises when overwhelmed</span></div>');
+  }
+  
+  document.getElementById('mentalHealthTips').innerHTML = tips.join('');
+  
+  // Digital Detox Plan
+  const detoxPlan = [
+    '<div class="detox-item"><i class="fa-solid fa-mobile-alt"></i><span>30-minute evening detox routine</span></div>',
+    '<div class="detox-item"><i class="fa-solid fa-mobile-alt"></i><span>Weekend digital-free morning</span></div>'
+  ];
+  
+  if (screenTime >= 7) {
+    detoxPlan.push('<div class="detox-item"><i class="fa-solid fa-mobile-alt"></i><span>2-hour digital break on weekends</span></div>');
+  }
+  
+  document.getElementById('detoxPlan').innerHTML = detoxPlan.join('');
+}
+
+function startWellnessJourney() {
+  alert('🌟 Welcome to your wellness journey! Check out the Wellness section for daily activities and tracking.');
+  window.location.href = '/wellness';
+}
+
+function saveResults() {
+  // Save to localStorage (in real app, send to server)
+  localStorage.setItem('wellnessAssessment', JSON.stringify(userData));
+  alert('💾 Your results have been saved! You can track your progress in the Dashboard.');
+  window.location.href = '/dashboard';
+}
+</script>
+{% endblock %}

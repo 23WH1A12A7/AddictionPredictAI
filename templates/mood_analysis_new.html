@@ -1,0 +1,1049 @@
+{% extends "base.html" %}
+
+{% block title %}AI Mood Analysis{% endblock %}
+
+{% block content %}
+<div class="mood-container">
+  <!-- Hero Section -->
+  <section class="mood-hero">
+    <div class="hero-content">
+      <div class="hero-icon">
+        <i class="fa-solid fa-brain"></i>
+      </div>
+      <h1>AI Mood Analysis</h1>
+      <p>Understand your emotional patterns and digital wellbeing through intelligent assessment</p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <i class="fa-solid fa-clock"></i>
+          <span>5 min assessment</span>
+        </div>
+        <div class="stat-item">
+          <i class="fa-solid fa-shield-alt"></i>
+          <span>100% private</span>
+        </div>
+        <div class="stat-item">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Personalized insights</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Insights -->
+  <section class="quick-insights">
+    <div class="insights-header">
+      <h2>Today's Quick Check</h2>
+      <p>How are you feeling right now?</p>
+    </div>
+    
+    <div class="mood-grid">
+      <div class="mood-card" onclick="selectMood('amazing')">
+        <div class="mood-emoji">😄</div>
+        <div class="mood-label">Amazing</div>
+        <div class="mood-desc">Feeling great!</div>
+      </div>
+      <div class="mood-card" onclick="selectMood('good')">
+        <div class="mood-emoji">😊</div>
+        <div class="mood-label">Good</div>
+        <div class="mood-desc">Pretty positive</div>
+      </div>
+      <div class="mood-card" onclick="selectMood('okay')">
+        <div class="mood-emoji">😐</div>
+        <div class="mood-label">Okay</div>
+        <div class="mood-desc">Just average</div>
+      </div>
+      <div class="mood-card" onclick="selectMood('low')">
+        <div class="mood-emoji">😔</div>
+        <div class="mood-label">Low</div>
+        <div class="mood-desc">Feeling down</div>
+      </div>
+      <div class="mood-card" onclick="selectMood('struggling')">
+        <div class="mood-emoji">😢</div>
+        <div class="mood-label">Struggling</div>
+        <div class="mood-desc">Need support</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Assessment Section -->
+  <section class="assessment-section">
+    <div class="section-header">
+      <h2>Complete Assessment</h2>
+      <p>Help us understand your digital wellbeing better</p>
+    </div>
+
+    <div class="assessment-grid">
+      <!-- Digital Habits Card -->
+      <div class="assessment-card">
+        <div class="card-header">
+          <i class="fa-solid fa-mobile-alt"></i>
+          <h3>Digital Habits</h3>
+        </div>
+        <div class="card-content">
+          <div class="question-group">
+            <label>How much time do you spend on your phone daily?</label>
+            <div class="emoji-slider">
+              <div class="slider-options">
+                <div class="option" data-value="1">
+                  <span class="emoji">📱</span>
+                  <span class="text">1-2 hours</span>
+                </div>
+                <div class="option" data-value="2">
+                  <span class="emoji">📱</span>
+                  <span class="text">3-4 hours</span>
+                </div>
+                <div class="option" data-value="3">
+                  <span class="emoji">📱</span>
+                  <span class="text">5-6 hours</span>
+                </div>
+                <div class="option" data-value="4">
+                  <span class="emoji">📱</span>
+                  <span class="text">7-8 hours</span>
+                </div>
+                <div class="option" data-value="5">
+                  <span class="emoji">📱</span>
+                  <span class="text">9+ hours</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="question-group">
+            <label>How often do you check your phone at night?</label>
+            <div class="emoji-slider">
+              <div class="slider-options">
+                <div class="option" data-value="1">
+                  <span class="emoji">🌙</span>
+                  <span class="text">Never</span>
+                </div>
+                <div class="option" data-value="2">
+                  <span class="emoji">🌙</span>
+                  <span class="text">Rarely</span>
+                </div>
+                <div class="option" data-value="3">
+                  <span class="emoji">🌙</span>
+                  <span class="text">Sometimes</span>
+                </div>
+                <div class="option" data-value="4">
+                  <span class="emoji">🌙</span>
+                  <span class="text">Often</span>
+                </div>
+                <div class="option" data-value="5">
+                  <span class="emoji">🌙</span>
+                  <span class="text">Always</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Emotional State Card -->
+      <div class="assessment-card">
+        <div class="card-header">
+          <i class="fa-solid fa-heart"></i>
+          <h3>Emotional State</h3>
+        </div>
+        <div class="card-content">
+          <div class="question-group">
+            <label>How do you feel after using social media?</label>
+            <div class="emoji-slider">
+              <div class="slider-options">
+                <div class="option" data-value="1">
+                  <span class="emoji">😊</span>
+                  <span class="text">Happy</span>
+                </div>
+                <div class="option" data-value="2">
+                  <span class="emoji">😐</span>
+                  <span class="text">Neutral</span>
+                </div>
+                <div class="option" data-value="3">
+                  <span class="emoji">😰</span>
+                  <span class="text">Anxious</span>
+                </div>
+                <div class="option" data-value="4">
+                  <span class="emoji">😔</span>
+                  <span class="text">Sad</span>
+                </div>
+                <div class="option" data-value="5">
+                  <span class="emoji">😡</span>
+                  <span class="text">Angry</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="question-group">
+            <label>How is your sleep quality?</label>
+            <div class="emoji-slider">
+              <div class="slider-options">
+                <div class="option" data-value="1">
+                  <span class="emoji">😴</span>
+                  <span class="text">Excellent</span>
+                </div>
+                <div class="option" data-value="2">
+                  <span class="emoji">😴</span>
+                  <span class="text">Good</span>
+                </div>
+                <div class="option" data-value="3">
+                  <span class="emoji">😴</span>
+                  <span class="text">Fair</span>
+                </div>
+                <div class="option" data-value="4">
+                  <span class="emoji">😴</span>
+                  <span class="text">Poor</span>
+                </div>
+                <div class="option" data-value="5">
+                  <span class="emoji">😴</span>
+                  <span class="text">Very Poor</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Focus & Concentration Card -->
+      <div class="assessment-card">
+        <div class="card-header">
+          <i class="fa-solid fa-bullseye"></i>
+          <h3>Focus & Concentration</h3>
+        </div>
+        <div class="card-content">
+          <div class="question-group">
+            <label>How well can you concentrate on tasks?</label>
+            <div class="emoji-slider">
+              <div class="slider-options">
+                <div class="option" data-value="1">
+                  <span class="emoji">🎯</span>
+                  <span class="text">Excellent</span>
+                </div>
+                <div class="option" data-value="2">
+                  <span class="emoji">👁️</span>
+                  <span class="text">Good</span>
+                </div>
+                <div class="option" data-value="3">
+                  <span class="emoji">👀</span>
+                  <span class="text">Average</span>
+                </div>
+                <div class="option" data-value="4">
+                  <span class="emoji">😵</span>
+                  <span class="text">Poor</span>
+                </div>
+                <div class="option" data-value="5">
+                  <span class="emoji">🤯</span>
+                  <span class="text">Very Poor</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="question-group">
+            <label>How often do you feel distracted?</label>
+            <div class="emoji-slider">
+              <div class="slider-options">
+                <div class="option" data-value="1">
+                  <span class="emoji">🧘</span>
+                  <span class="text">Never</span>
+                </div>
+                <div class="option" data-value="2">
+                  <span class="emoji">🧘</span>
+                  <span class="text">Rarely</span>
+                </div>
+                <div class="option" data-value="3">
+                  <span class="emoji">🧘</span>
+                  <span class="text">Sometimes</span>
+                </div>
+                <div class="option" data-value="4">
+                  <span class="emoji">🧘</span>
+                  <span class="text">Often</span>
+                </div>
+                <div class="option" data-value="5">
+                  <span class="emoji">🧘</span>
+                  <span class="text">Always</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-section">
+      <button class="analyze-btn" onclick="analyzeMood()">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Analyze My Mood</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Insights Section -->
+  <section class="insights-section" id="insightsSection" style="display: none;">
+    <div class="section-header">
+      <h2>Your Personalized Insights</h2>
+      <p>AI-powered analysis of your digital wellbeing</p>
+    </div>
+
+    <div class="insights-grid">
+      <div class="insight-card">
+        <div class="insight-icon">
+          <i class="fa-solid fa-brain"></i>
+        </div>
+        <h3>Emotional State</h3>
+        <div class="insight-value" id="emotionalState">Balanced</div>
+        <p>Your emotional patterns show good balance between digital and real-world experiences.</p>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-icon">
+          <i class="fa-solid fa-shield-alt"></i>
+        </div>
+        <h3>Risk Level</h3>
+        <div class="insight-value" id="riskLevel">Low</div>
+        <p>Your digital habits are within healthy ranges with minimal risk factors.</p>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-icon">
+          <i class="fa-solid fa-chart-line"></i>
+        </div>
+        <h3>Trend</h3>
+        <div class="insight-value" id="trend">Improving</div>
+        <p>Your digital wellbeing is showing positive trends over time.</p>
+      </div>
+    </div>
+
+    <!-- Recommendations -->
+    <div class="recommendations-section">
+      <h3>Personalized Recommendations</h3>
+      <div class="recommendations-grid">
+        <div class="recommendation-card">
+          <div class="rec-icon">
+            <i class="fa-solid fa-moon"></i>
+          </div>
+          <h4>Sleep Better</h4>
+          <p>Try a digital detox 1 hour before bedtime for better sleep quality.</p>
+        </div>
+        <div class="recommendation-card">
+          <div class="rec-icon">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <h4>Connect More</h4>
+          <p>Schedule regular face-to-face interactions to balance digital time.</p>
+        </div>
+        <div class="recommendation-card">
+          <div class="rec-icon">
+            <i class="fa-solid fa-spa"></i>
+          </div>
+          <h4>Mindful Breaks</h4>
+          <p>Take 5-minute breaks every hour to reset your focus.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collapsible Disclaimer -->
+  <section class="disclaimer-section">
+    <div class="disclaimer-toggle" onclick="toggleDisclaimer()">
+      <h3>
+        <i class="fa-solid fa-info-circle"></i>
+        Important Information
+        <i class="fa-solid fa-chevron-down" id="disclaimerIcon"></i>
+      </h3>
+    </div>
+    <div class="disclaimer-content" id="disclaimerContent" style="display: none;">
+      <div class="disclaimer-text">
+        <p><strong>Important:</strong> This assessment is for educational purposes only and is not a substitute for professional medical advice. If you're experiencing severe mental health concerns, please consult a qualified healthcare professional.</p>
+        <p><strong>Privacy:</strong> Your responses are processed locally and are not stored or shared with third parties.</p>
+        <p><strong>Emergency:</strong> If you're in crisis, please contact emergency services or mental health helplines in your area.</p>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.mood-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+}
+
+/* Hero Section */
+.mood-hero {
+  padding: 60px 40px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+}
+
+.hero-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.hero-icon i {
+  font-size: 36px;
+  color: white;
+}
+
+.mood-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+}
+
+.mood-hero p {
+  font-size: 1.1rem;
+  color: #94a3b8;
+  margin: 0 0 30px 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.stat-item i {
+  color: #667eea;
+}
+
+.stat-item span {
+  color: #e5e7eb;
+  font-weight: 600;
+}
+
+/* Quick Insights */
+.quick-insights {
+  padding: 60px 40px;
+}
+
+.insights-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.insights-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+}
+
+.insights-header p {
+  color: #94a3b8;
+  margin: 0;
+}
+
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.mood-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mood-card:hover {
+  transform: translateY(-4px);
+  border-color: #667eea;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+}
+
+.mood-card.selected {
+  background: rgba(102, 126, 234, 0.2);
+  border-color: #667eea;
+}
+
+.mood-emoji {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.mood-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.mood-desc {
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+/* Assessment Section */
+.assessment-section {
+  padding: 60px 40px;
+  background: rgba(255,255,255,0.02);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+}
+
+.section-header p {
+  color: #94a3b8;
+  margin: 0;
+}
+
+.assessment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.assessment-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 30px;
+  transition: all 0.3s ease;
+}
+
+.assessment-card:hover {
+  transform: translateY(-4px);
+  border-color: #667eea;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card-header i {
+  font-size: 24px;
+  color: #667eea;
+}
+
+.card-header h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.question-group {
+  margin-bottom: 30px;
+}
+
+.question-group label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e5e7eb;
+  margin-bottom: 16px;
+}
+
+.emoji-slider {
+  width: 100%;
+}
+
+.slider-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.option {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 12px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.option:hover {
+  background: rgba(102, 126, 234, 0.1);
+  border-color: #667eea;
+}
+
+.option.selected {
+  background: rgba(102, 126, 234, 0.2);
+  border-color: #667eea;
+}
+
+.option .emoji {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.option .text {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.action-section {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.analyze-btn {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+  border-radius: 16px;
+  padding: 16px 32px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.analyze-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+}
+
+.analyze-btn i {
+  margin-right: 12px;
+}
+
+/* Insights Section */
+.insights-section {
+  padding: 60px 40px;
+  background: rgba(255,255,255,0.02);
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.insight-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+}
+
+.insight-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.insight-icon i {
+  font-size: 24px;
+  color: white;
+}
+
+.insight-card h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+}
+
+.insight-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #22c55e;
+  margin-bottom: 16px;
+}
+
+.insight-card p {
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+/* Recommendations */
+.recommendations-section {
+  margin-top: 40px;
+}
+
+.recommendations-section h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.recommendation-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+}
+
+.rec-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(102, 126, 234, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.rec-icon i {
+  font-size: 20px;
+  color: #667eea;
+}
+
+.recommendation-card h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 12px 0;
+}
+
+.recommendation-card p {
+  color: #94a3b8;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+/* Disclaimer */
+.disclaimer-section {
+  padding: 40px;
+  background: rgba(255,255,255,0.02);
+}
+
+.disclaimer-toggle {
+  cursor: pointer;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.disclaimer-toggle:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+.disclaimer-toggle h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  color: #94a3b8;
+  font-size: 1.1rem;
+}
+
+.disclaimer-toggle i:first-child {
+  margin-right: 12px;
+  color: #f59e0b;
+}
+
+.disclaimer-toggle i:last-child {
+  transition: transform 0.3s ease;
+}
+
+.disclaimer-toggle.open i:last-child {
+  transform: rotate(180deg);
+}
+
+.disclaimer-content {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(245, 158, 11, 0.1);
+  border-radius: 12px;
+  border-left: 4px solid #f59e0b;
+}
+
+.disclaimer-text p {
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.disclaimer-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .mood-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero-stats {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .mood-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+  
+  .assessment-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .slider-options {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  }
+  
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .recommendations-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+let selectedMood = null;
+let responses = {};
+
+function selectMood(mood) {
+  selectedMood = mood;
+  
+  // Update UI
+  document.querySelectorAll('.mood-card').forEach(card => {
+    card.classList.remove('selected');
+  });
+  event.currentTarget.classList.add('selected');
+  
+  // Scroll to assessment
+  setTimeout(() => {
+    document.querySelector('.assessment-section').scrollIntoView({ behavior: 'smooth' });
+  }, 300);
+}
+
+// Handle option selection
+document.querySelectorAll('.option').forEach(option => {
+  option.addEventListener('click', function() {
+    const questionGroup = this.closest('.question-group');
+    const questionName = questionGroup.querySelector('label').textContent;
+    
+    // Remove previous selection in this group
+    questionGroup.querySelectorAll('.option').forEach(opt => {
+      opt.classList.remove('selected');
+    });
+    
+    // Add selection to clicked option
+    this.classList.add('selected');
+    
+    // Store response
+    responses[questionName] = this.dataset.value;
+  });
+});
+
+function analyzeMood() {
+  // Check if all questions are answered
+  const questionGroups = document.querySelectorAll('.question-group');
+  let allAnswered = true;
+  
+  questionGroups.forEach(group => {
+    if (!group.querySelector('.option.selected')) {
+      allAnswered = false;
+    }
+  });
+  
+  if (!allAnswered) {
+    showNotification('Please answer all questions before analyzing your mood.', 'warning');
+    return;
+  }
+  
+  // Collect responses
+  const data = {
+    daily_screen_time: getSelectedValue('How much time do you spend on your phone daily?'),
+    night_usage: getSelectedValue('How often do you check your phone at night?'),
+    social_media_feeling: getSelectedValue('How do you feel after using social media?'),
+    sleep_quality: getSelectedValue('How is your sleep quality?'),
+    concentration: getSelectedValue('How well can you concentrate on tasks?'),
+    distraction_frequency: getSelectedValue('How often do you feel distracted?')
+  };
+  
+  // Send to backend
+  fetch('/api/mood-analysis', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(result => {
+    if (result.error) {
+      showNotification(result.error, 'error');
+      return;
+    }
+    
+    // Show insights section
+    document.getElementById('insightsSection').style.display = 'block';
+    
+    // Update insights with backend data
+    updateInsights(result);
+    
+    // Scroll to insights
+    setTimeout(() => {
+      document.getElementById('insightsSection').scrollIntoView({ behavior: 'smooth' });
+    }, 300);
+    
+    showNotification('Analysis complete! Check your insights below.', 'success');
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    showNotification('Error analyzing mood. Please try again.', 'error');
+  });
+}
+
+function getSelectedValue(questionText) {
+  const questionGroups = document.querySelectorAll('.question-group');
+  for (let group of questionGroups) {
+    const label = group.querySelector('label').textContent;
+    if (label === questionText) {
+      const selected = group.querySelector('.option.selected');
+      return selected ? selected.dataset.value : null;
+    }
+  }
+  return null;
+}
+
+function updateInsights(result) {
+  document.getElementById('emotionalState').textContent = result.emotional_state;
+  document.getElementById('riskLevel').textContent = result.risk_level;
+  
+  // Update recommendations
+  const recommendationsHtml = result.recommendations.map(rec => `
+    <div class="recommendation-card">
+      <div class="rec-icon">
+        <i class="fa-solid fa-lightbulb"></i>
+      </div>
+      <h4>Personalized Tip</h4>
+      <p>${rec}</p>
+    </div>
+  `).join('');
+  
+  document.querySelector('.recommendations-grid').innerHTML = recommendationsHtml;
+}
+
+function selectMood(mood) {
+  selectedMood = mood;
+  
+  // Update UI
+  document.querySelectorAll('.mood-card').forEach(card => {
+    card.classList.remove('selected');
+  });
+  event.currentTarget.classList.add('selected');
+  
+  // Save mood to backend
+  fetch('/api/save-mood', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ mood: mood, timestamp: new Date().toISOString() })
+  })
+  .then(response => response.json())
+  .then(result => {
+    if (result.success) {
+      showNotification('Mood saved successfully!', 'success');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+  
+  // Scroll to assessment
+  setTimeout(() => {
+    document.querySelector('.assessment-section').scrollIntoView({ behavior: 'smooth' });
+  }, 300);
+}
+
+function showNotification(message, type = 'info') {
+  const notification = document.createElement('div');
+  notification.className = `notification ${type}`;
+  notification.innerHTML = `
+    <div class="notification-content">
+      <i class="fa-solid fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+      <span>${message}</span>
+    </div>
+  `;
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.remove();
+  }, 3000);
+}
+
+function toggleDisclaimer() {
+  const content = document.getElementById('disclaimerContent');
+  const toggle = document.querySelector('.disclaimer-toggle');
+  const icon = document.getElementById('disclaimerIcon');
+  
+  if (content.style.display === 'none') {
+    content.style.display = 'block';
+    toggle.classList.add('open');
+  } else {
+    content.style.display = 'none';
+    toggle.classList.remove('open');
+  }
+}
+</script>
+{% endblock %}
