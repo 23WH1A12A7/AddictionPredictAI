@@ -1181,13 +1181,33 @@ function setTimer(minutes) {
 
 function setCustomTimer() {
   const customTime = document.getElementById('customTime').value;
-  if (customTime && customTime > 0 && customTime <= 60) {
-    totalSeconds = customTime * 60;
+  const timeValue = parseInt(customTime);
+  
+  if (timeValue && timeValue > 0 && timeValue <= 60) {
+    totalSeconds = timeValue * 60;
     updateTimerDisplay();
     
     // Update active button styling
     document.querySelectorAll('.time-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelector('.time-btn.custom').classList.add('active');
+    const customBtn = document.querySelector('.time-btn.custom');
+    if (customBtn) {
+      customBtn.classList.add('active');
+    }
+    
+    // Clear any existing timer
+    if (isRunning) {
+      clearInterval(timerInterval);
+      isRunning = false;
+      const playPauseBtn = document.getElementById('playPauseBtn');
+      const icon = playPauseBtn.querySelector('i');
+      const text = playPauseBtn.querySelector('span');
+      icon.className = 'fa-solid fa-play';
+      text.textContent = 'Start';
+      playPauseBtn.classList.remove('pause');
+      playPauseBtn.classList.add('play');
+    }
+  } else {
+    alert('Please enter a valid time between 1 and 60 minutes');
   }
 }
 

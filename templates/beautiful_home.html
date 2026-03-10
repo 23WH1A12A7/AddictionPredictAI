@@ -74,25 +74,27 @@
           </div>
           {% endif %}
           
-          <h1 class="hero-title">
-            <span class="title-gradient">Reclaim Your Digital Freedom</span>
-          </h1>
-          <p class="hero-description">
-            Discover your relationship with technology and build healthier digital habits through our AI-powered wellness platform
-          </p>
-          <div class="hero-buttons">
-            <button class="hero-btn primary" onclick="startAssessment()">
-              <div class="btn-content">
-                <i class="fa-solid fa-play"></i>
-                <span>Start Assessment</span>
-              </div>
-            </button>
-            <button class="hero-btn secondary" onclick="goToWellness()">
-              <div class="btn-content">
-                <i class="fa-solid fa-heart"></i>
-                <span>Wellness Journey</span>
-              </div>
-            </button>
+          <div class="main-hero-content">
+            <h1 class="hero-title">
+              <span class="title-gradient">Reclaim Your Digital Freedom</span>
+            </h1>
+            <p class="hero-description">
+              Discover your relationship with technology and build healthier digital habits through our AI-powered wellness platform
+            </p>
+            <div class="hero-buttons">
+              <button class="hero-btn primary" onclick="startAssessment()">
+                <div class="btn-content">
+                  <i class="fa-solid fa-play"></i>
+                  <span>Start Assessment</span>
+                </div>
+              </button>
+              <button class="hero-btn secondary" onclick="goToWellness()">
+                <div class="btn-content">
+                  <i class="fa-solid fa-heart"></i>
+                  <span>Wellness Journey</span>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
         
@@ -888,8 +890,9 @@
   background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(168, 85, 247, 0.1));
   border-radius: 16px;
   padding: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   border: 1px solid rgba(102, 126, 234, 0.2);
+  text-align: center;
 }
 
 .welcome-title {
@@ -905,6 +908,10 @@
   margin: 0;
 }
 
+.main-hero-content {
+  text-align: center;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .header-content {
@@ -914,11 +921,49 @@
   
   .hero-content {
     flex-direction: column;
-    gap: 40px;
+    gap: 30px;
+    text-align: center;
+  }
+  
+  .hero-left {
+    text-align: center;
+  }
+  
+  .welcome-message {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .welcome-title {
+    font-size: 20px;
+  }
+  
+  .welcome-subtitle {
+    font-size: 14px;
   }
   
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 28px;
+  }
+  
+  .hero-description {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .hero-btn {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .hero-right {
+    display: none;
   }
   
   .features-grid {

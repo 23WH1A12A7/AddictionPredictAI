@@ -107,8 +107,11 @@ def login_required(f):
 
 @app.route("/")
 def home():
-    if 'user_id' not in session:
+    # Check if user is authenticated
+    if 'user_id' not in session or 'username' not in session:
         return render_template("landing.html")
+    
+    # User is authenticated, show home page
     return render_template("beautiful_home.html")
 
 @app.route("/mood-analysis")
@@ -756,9 +759,22 @@ def predict():
             night_usage
         ]).reshape(1, -1)
 
+        # Debug: Print input data
+        print(f"Input data: {input_data}")
+        print(f"Input shape: {input_data.shape}")
+
         # Prediction
-        prediction = model.predict(input_data)[0]
-        probability = model.predict_proba(input_data)[0][prediction]
+        try:
+            prediction = model.predict(input_data)[0]
+            probability = model.predict_proba(input_data)[0][prediction]
+            print(f"Raw prediction: {prediction}")
+            print(f"Probability: {probability}")
+        except Exception as e:
+            print(f"Prediction error: {e}")
+            return render_template("ai_guided_home.html", 
+                                 prediction_text="Error in prediction", 
+                                 confidence=0, 
+                                 risk="Unknown")
 
         confidence = round(probability * 100, 2)
 
