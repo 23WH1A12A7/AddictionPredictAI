@@ -13,6 +13,72 @@
 
   <link rel="stylesheet" href="/static/style.css" />
   
+  <!-- Authentication styles -->
+  <style>
+    .nav-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.2);
+      margin: 10px 0;
+    }
+    
+    .nav-user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+    }
+    
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .username {
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .logout-link {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.3s;
+    }
+    
+    .logout-link:hover {
+      color: white;
+    }
+    
+    .bottom-nav-spacer {
+      flex: 1;
+    }
+    
+    @media (max-width: 768px) {
+      .nav-user-profile {
+        margin-top: 10px;
+      }
+    }
+  </style>
+  
   {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -30,22 +96,48 @@
   </div>
   
   <div class="nav-items" id="navItems">
-    <a href="/" class="nav-item {% if request.endpoint == 'home' %}active{% endif %}">
-      <i class="fa-solid fa-home"></i>
-      <span>Home</span>
-    </a>
-    <a href="/mood-analysis" class="nav-item {% if request.endpoint == 'mood_analysis' %}active{% endif %}">
-      <i class="fa-solid fa-brain"></i>
-      <span>Mood Analysis</span>
-    </a>
-    <a href="/dashboard" class="nav-item {% if request.endpoint == 'dashboard' %}active{% endif %}">
-      <i class="fa-solid fa-chart-line"></i>
-      <span>Dashboard</span>
-    </a>
-    <a href="/wellness" class="nav-item {% if request.endpoint == 'wellness' %}active{% endif %}">
-      <i class="fa-solid fa-heart"></i>
-      <span>Wellness</span>
-    </a>
+    {% if session.user_id %}
+      <!-- Authenticated user navigation -->
+      <a href="/" class="nav-item {% if request.endpoint == 'home' %}active{% endif %}">
+        <i class="fa-solid fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="/mood-analysis" class="nav-item {% if request.endpoint == 'mood_analysis' %}active{% endif %}">
+        <i class="fa-solid fa-brain"></i>
+        <span>Mood Analysis</span>
+      </a>
+      <a href="/dashboard" class="nav-item {% if request.endpoint == 'dashboard' %}active{% endif %}">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="/wellness" class="nav-item {% if request.endpoint == 'wellness' %}active{% endif %}">
+        <i class="fa-solid fa-heart"></i>
+        <span>Wellness</span>
+      </a>
+      <div class="nav-divider"></div>
+      <div class="nav-user-profile">
+        <div class="user-avatar">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="user-info">
+          <span class="username">{{ session.username }}</span>
+          <a href="/logout" class="logout-link">
+            <i class="fa-solid fa-sign-out-alt"></i>
+            Logout
+          </a>
+        </div>
+      </div>
+    {% else %}
+      <!-- Non-authenticated user navigation -->
+      <a href="/login" class="nav-item {% if request.endpoint == 'login' %}active{% endif %}">
+        <i class="fa-solid fa-sign-in-alt"></i>
+        <span>Login</span>
+      </a>
+      <a href="/signup" class="nav-item {% if request.endpoint == 'signup' %}active{% endif %}">
+        <i class="fa-solid fa-user-plus"></i>
+        <span>Sign Up</span>
+      </a>
+    {% endif %}
   </div>
 </div>
 
@@ -58,22 +150,35 @@
 
 <!-- Bottom Navigation (Mobile App Style) -->
 <div class="bottom-nav">
-  <a href="/" class="bottom-nav-item {% if request.endpoint == 'home' %}active{% endif %}">
-    <i class="fa-solid fa-home"></i>
-    <span>Home</span>
-  </a>
-  <a href="/mood-analysis" class="bottom-nav-item {% if request.endpoint == 'mood_analysis' %}active{% endif %}">
-    <i class="fa-solid fa-brain"></i>
-    <span>Mood</span>
-  </a>
-  <a href="/dashboard" class="bottom-nav-item {% if request.endpoint == 'dashboard' %}active{% endif %}">
-    <i class="fa-solid fa-chart-line"></i>
-    <span>Dashboard</span>
-  </a>
-  <a href="/wellness" class="bottom-nav-item {% if request.endpoint == 'wellness' %}active{% endif %}">
-    <i class="fa-solid fa-heart"></i>
-    <span>Wellness</span>
-  </a>
+  {% if session.user_id %}
+    <a href="/" class="bottom-nav-item {% if request.endpoint == 'home' %}active{% endif %}">
+      <i class="fa-solid fa-home"></i>
+      <span>Home</span>
+    </a>
+    <a href="/mood-analysis" class="bottom-nav-item {% if request.endpoint == 'mood_analysis' %}active{% endif %}">
+      <i class="fa-solid fa-brain"></i>
+      <span>Mood</span>
+    </a>
+    <a href="/dashboard" class="bottom-nav-item {% if request.endpoint == 'dashboard' %}active{% endif %}">
+      <i class="fa-solid fa-chart-line"></i>
+      <span>Dashboard</span>
+    </a>
+    <a href="/wellness" class="bottom-nav-item {% if request.endpoint == 'wellness' %}active{% endif %}">
+      <i class="fa-solid fa-heart"></i>
+      <span>Wellness</span>
+    </a>
+  {% else %}
+    <a href="/login" class="bottom-nav-item {% if request.endpoint == 'login' %}active{% endif %}">
+      <i class="fa-solid fa-sign-in-alt"></i>
+      <span>Login</span>
+    </a>
+    <a href="/signup" class="bottom-nav-item {% if request.endpoint == 'signup' %}active{% endif %}">
+      <i class="fa-solid fa-user-plus"></i>
+      <span>Sign Up</span>
+    </a>
+    <div class="bottom-nav-spacer"></div>
+    <div class="bottom-nav-spacer"></div>
+  {% endif %}
 </div>
 
 <script>

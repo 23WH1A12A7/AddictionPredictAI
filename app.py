@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for
+from functools import wraps
 import numpy as np
 import pickle
 import random
@@ -11,71 +12,118 @@ import sqlite3
 from psychological_module import PsychologicalAnalyzer
 
 app = Flask(__name__)
-app.secret_key = 'your-secret-key-here'  # Change in production
+app.secret_key = 'your-secret-key-here'
 
-# Load trained model
 model = joblib.load("random_forest_addiction_model.pkl")
 
-# Initialize psychological analyzer
 psych_analyzer = PsychologicalAnalyzer()
 
-# Store user sessions (in production, use proper database)
 user_sessions = {}
+
+# Authentication routes
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        
+        try:
+            user = db.authenticate_user(username, password)
+            
+            if user:
+                session['user_id'] = user['user_id']
+                session['username'] = user['username']
+                session['email'] = user['email']
+                session.permanent = True
+                
+                # Update last active
+                db.update_last_active(user['user_id'])
+                
+                return redirect(url_for('home'))
+            else:
+                return render_template("login.html", error="Invalid username or password")
+        except Exception as e:
+            print(f"Login error: {e}")
+            return render_template("login.html", error="An error occurred. Please try again.")
+    
+    return render_template("login.html")
+
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        username = request.form.get("username")
+        email = request.form.get("email")
+        password = request.form.get("password")
+        confirm_password = request.form.get("confirm_password")
+        
+        try:
+            # Basic validation
+            if password != confirm_password:
+                return render_template("signup.html", error="Passwords do not match")
+            
+            if len(password) < 6:
+                return render_template("signup.html", error="Password must be at least 6 characters")
+            
+            if len(username) < 3:
+                return render_template("signup.html", error="Username must be at least 3 characters")
+            
+            # Create user
+            success = db.create_user(username, email, password)
+            
+            if success:
+                # Auto-login after successful signup
+                user = db.authenticate_user(username, password)
+                if user:
+                    session['user_id'] = user['user_id']
+                    session['username'] = user['username']
+                    session['email'] = user['email']
+                    session.permanent = True
+                    
+                    # Update last active
+                    db.update_last_active(user['user_id'])
+                    
+                    return redirect(url_for('home'))
+            else:
+                return render_template("signup.html", error="Username or email already exists")
+        except Exception as e:
+            print(f"Signup error: {e}")
+            return render_template("signup.html", error="An error occurred. Please try again.")
+    
+    return render_template("signup.html")
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
+
+# Authentication decorator
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in session:
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 @app.route("/")
 def home():
-    # Initialize user session if not exists
     if 'user_id' not in session:
-        session['user_id'] = f"user_{random.randint(10000, 99999)}"
-        session.permanent = True  # Make session permanent
+        return render_template("landing.html")
     return render_template("beautiful_home.html")
 
 @app.route("/mood-analysis")
+@login_required
 def mood_analysis():
-    # Ensure session exists
-    if 'user_id' not in session:
-        session['user_id'] = f"user_{random.randint(10000, 99999)}"
-        session.permanent = True
     return render_template("mood_analysis_new.html")
 
 @app.route("/dashboard")
+@login_required
 def dashboard():
-    # Ensure session exists
-    if 'user_id' not in session:
-        session['user_id'] = f"user_{random.randint(10000, 99999)}"
-        session.permanent = True
     return render_template("dashboard_new.html")
 
 @app.route("/wellness")
+@login_required
 def wellness():
-    # Ensure session exists - use existing user with data if available
-    if 'user_id' not in session:
-        # Try to use an existing user that has data
-        try:
-            # Get a user with existing streak data
-            conn = sqlite3.connect('wellness_data.db')
-            cursor = conn.cursor()
-            cursor.execute('''
-                SELECT user_id FROM streaks 
-                WHERE current_streak > 0 
-                ORDER BY last_activity_date DESC 
-                LIMIT 1
-            ''')
-            result = cursor.fetchone()
-            conn.close()
-            
-            if result:
-                session['user_id'] = result[0]
-                print(f"Using existing user with data: {result[0]}")
-            else:
-                # Fallback to new user if no existing data found
-                session['user_id'] = f"user_{random.randint(10000, 99999)}"
-                print(f"Created new user: {session['user_id']}")
-        except Exception as e:
-            print(f"Error getting existing user: {e}")
-            session['user_id'] = f"user_{random.randint(10000, 99999)}"
-        
-        session.permanent = True
     return render_template("wellness_new.html")
 
 @app.route("/api/mood-analysis", methods=["POST"])

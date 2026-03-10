@@ -1,12 +1,20 @@
 import sqlite3
 import json
 import random
+import os
 from datetime import datetime, timedelta
 from typing import List, Dict, Optional
 
 class DatabaseManager:
-    def __init__(self, db_path: str = "wellness_data.db"):
-        self.db_path = db_path
+    def __init__(self, db_path: str = None):
+        # Use /tmp for Vercel serverless environment
+        if db_path is None:
+            if os.environ.get('VERCEL'):
+                self.db_path = "/tmp/wellness_data.db"
+            else:
+                self.db_path = "wellness_data.db"
+        else:
+            self.db_path = db_path
         self.init_database()
     
     def init_database(self):
@@ -14,11 +22,15 @@ class DatabaseManager:
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
-        # Users table
+        # Users table with authentication
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 user_id TEXT UNIQUE,
+                username TEXT UNIQUE,
+                email TEXT UNIQUE,
+                password_hash TEXT,
+                salt TEXT,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 last_active TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
@@ -613,6 +625,103 @@ class DatabaseManager:
         
         conn.close()
         return progress
+    
+    # Authentication methods
+    def create_user(self, username: str, email: str, password: str) -> bool:
+        """Create a new user with authentication"""
+        import hashlib
+        import secrets
+        
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        try:
+            # Generate password hash
+            salt = secrets.token_hex(16)
+            password_hash = hashlib.sha256((password + salt).encode()).hexdigest()
+            
+            # Generate unique user_id
+            user_id = f"user_{secrets.token_hex(8)}"
+            
+            cursor.execute('''
+                INSERT INTO users (user_id, username, email, password_hash, salt)
+                VALUES (?, ?, ?, ?, ?)
+            ''', (user_id, username, email, password_hash, salt))
+            
+            conn.commit()
+            conn.close()
+            return True
+        except sqlite3.IntegrityError:
+            conn.close()
+            return False
+    
+    def authenticate_user(self, username: str, password: str) -> Optional[Dict]:
+        """Authenticate user and return user data"""
+        import hashlib
+        
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            SELECT user_id, username, email, password_hash, salt, last_active
+            FROM users WHERE username = ? OR email = ?
+        ''', (username, username))
+        
+        user = cursor.fetchone()
+        conn.close()
+        
+        if user:
+            user_id, username, email, stored_hash, salt, last_active = user
+            
+            # Hash the provided password with the stored salt
+            password_hash = hashlib.sha256((password + salt).encode()).hexdigest()
+            
+            if password_hash == stored_hash:
+                return {
+                    'user_id': user_id,
+                    'username': username,
+                    'email': email,
+                    'last_active': last_active
+                }
+        
+        return None
+    
+    def get_user_by_id(self, user_id: str) -> Optional[Dict]:
+        """Get user data by user_id"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            SELECT user_id, username, email, created_at, last_active
+            FROM users WHERE user_id = ?
+        ''', (user_id,))
+        
+        user = cursor.fetchone()
+        conn.close()
+        
+        if user:
+            return {
+                'user_id': user[0],
+                'username': user[1],
+                'email': user[2],
+                'created_at': user[3],
+                'last_active': user[4]
+            }
+        
+        return None
+    
+    def update_last_active(self, user_id: str):
+        """Update user's last active timestamp"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            UPDATE users SET last_active = CURRENT_TIMESTAMP
+            WHERE user_id = ?
+        ''', (user_id,))
+        
+        conn.commit()
+        conn.close()
 
 # Global database instance
 db = DatabaseManager()

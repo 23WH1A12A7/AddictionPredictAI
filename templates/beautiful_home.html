@@ -67,6 +67,13 @@
     <section class="hero">
       <div class="hero-content">
         <div class="hero-left">
+          {% if session.username %}
+          <div class="welcome-message">
+            <h2 class="welcome-title">Welcome back, {{ session.username }}! 👋</h2>
+            <p class="welcome-subtitle">Ready to continue your digital wellness journey?</p>
+          </div>
+          {% endif %}
+          
           <h1 class="hero-title">
             <span class="title-gradient">Reclaim Your Digital Freedom</span>
           </h1>
@@ -77,13 +84,13 @@
             <button class="hero-btn primary" onclick="startAssessment()">
               <div class="btn-content">
                 <i class="fa-solid fa-play"></i>
-                <span>Start Free Assessment</span>
+                <span>Start Assessment</span>
               </div>
             </button>
-            <button class="hero-btn secondary" onclick="watchDemo()">
+            <button class="hero-btn secondary" onclick="goToWellness()">
               <div class="btn-content">
-                <i class="fa-solid fa-play-circle"></i>
-                <span>Watch Demo</span>
+                <i class="fa-solid fa-heart"></i>
+                <span>Wellness Journey</span>
               </div>
             </button>
           </div>
@@ -876,6 +883,28 @@
   box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
 }
 
+/* Welcome Message Styles */
+.welcome-message {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(168, 85, 247, 0.1));
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.welcome-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.welcome-subtitle {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .header-content {
@@ -919,8 +948,12 @@ function startAssessment() {
   window.location.href = '/mood-analysis';
 }
 
+function goToWellness() {
+  window.location.href = '/wellness';
+}
+
 function watchDemo() {
-  alert('Demo video coming soon! Start your free assessment now.');
+  alert('Demo video coming soon! Start your assessment now.');
 }
 
 function goToFeature(feature) {
